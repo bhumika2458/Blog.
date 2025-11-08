@@ -1,0 +1,105 @@
+import React from "react";
+import { motion } from "framer-motion";
+
+// SecureMind Logo + Header React component
+// Usage: drop this file into a React + Tailwind project (create-react-app or Vite).
+// Requirements: Tailwind CSS configured. framer-motion is optional but included for subtle animation.
+
+export default function SecureMindHeader({ size = "md", showTagline = true }) {
+  const sizes = {
+    sm: { text: "text-2xl", emoji: "text-2xl" },
+    md: { text: "text-4xl", emoji: "text-3xl" },
+    lg: { text: "text-6xl", emoji: "text-5xl" },
+  };
+  const s = sizes[size] || sizes.md;
+
+  return (
+    <header className="flex items-center gap-4 p-6 bg-gradient-to-r from-slate-900 via-indigo-900 to-sky-900 rounded-2xl shadow-2xl">
+      {/* Logo circle with gradient brain icon */}
+      <motion.div
+        initial={{ rotate: -10, scale: 0.9 }}
+        animate={{ rotate: 0, scale: 1 }}
+        transition={{ type: "spring", stiffness: 120 }}
+        className="flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-teal-400 to-indigo-600 shadow-lg"
+        aria-hidden
+      >
+        <svg
+          width="56"
+          height="56"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="filter drop-shadow-sm"
+        >
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stopColor="#fff" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#0f172a" stopOpacity="0.15" />
+            </linearGradient>
+          </defs>
+          {/* simplified brain icon */}
+          <path d="M5 12c0-3.866 3.134-7 7-7s7 3.134 7 7-3.134 7-7 7-7-3.134-7-7z" fill="url(#g1)" />
+          <path d="M9 9c0-1 1-2 2-2s2 1 2 2-1 2-2 2-2-1-2-2z" fill="#0b1220" opacity="0.08" />
+        </svg>
+      </motion.div>
+
+      {/* Title and tagline */}
+      <div className="flex flex-col">
+        <div className="flex items-center gap-3">
+          {/* Gradient text title */}
+          <h1 className={`font-extrabold tracking-tighter leading-none ${s.text} bg-clip-text text-transparent bg-gradient-to-r from-white via-emerald-200 to-sky-200 drop-shadow-md`}>
+            SecureMind
+          </h1>
+
+          {/* Fun emoji badge */}
+          <span className={`inline-flex items-center justify-center rounded-full px-2 py-1 text-sm font-semibold ring-1 ring-white/20 ${s.emoji}`} title="Cyber-curious">
+            🧠🔒
+          </span>
+        </div>
+
+        {showTagline && (
+          <p className="mt-1 text-sm text-slate-200 opacity-90 max-w-md">
+            Cyber security essentials — gamified for beginners. Practice, level up, and keep your digital wits sharp.
+          </p>
+        )}
+
+        {/* Small stats row: levels, accuracy, practice */}
+        <div className="mt-3 flex gap-2 text-xs">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/6">
+            <span className="font-medium">Levels</span>
+            <span className="ml-1 rounded-full bg-white/8 px-2 py-0.5">★ Beginner → Pro</span>
+          </div>
+
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/6">
+            <span className="font-medium">Practice</span>
+            <span className="ml-1 rounded-full bg-white/8 px-2 py-0.5">Exercises</span>
+          </div>
+
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/6">
+            <span className="font-medium">Accuracy</span>
+            <span className="ml-1 rounded-full bg-white/8 px-2 py-0.5">Per-user</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Right-side playful CTA */}
+      <div className="ml-auto">
+        <button className="flex items-center gap-2 rounded-xl px-4 py-2 bg-gradient-to-r from-indigo-500 to-sky-400 hover:scale-105 transform transition shadow-md">
+          <span className="text-sm font-semibold text-white">Start Learning</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+  );
+}
+
+// Optional: export a small styled CSS snippet the developer can paste into globals if needed
+export const SecureMindStyles = `
+/* Paste this into globals.css or a component CSS module if you want more control */
+.securemind-glow {
+  filter: drop-shadow(0 8px 24px rgba(14,165,233,0.18));
+}
+`;
+
